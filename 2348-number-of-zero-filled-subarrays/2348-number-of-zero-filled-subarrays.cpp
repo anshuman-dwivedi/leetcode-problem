@@ -7,11 +7,13 @@ public:
             if(nums[i]==0)
             {
                 count++;
-                ans+=count;
 }
-            else
+            else{
+                ans+=(count*(count+1))/2;
             count=0;
+            }
 }
+        ans+=(count*(count+1))/2;
         return ans;
     }
 };
