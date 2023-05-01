@@ -2,25 +2,24 @@ class Solution {
 public:
 bool helper(vector<int>& arr,int N,int target, vector<vector<bool>> & dp)
 {
-for(int i=0;i<N;i++)
-{
-    dp[i][0]=true;
-}
-    if(arr[0]<=target)
-        dp[0][arr[0]]=true;
+       vector<int>prev(target+1);
+       vector<int>curr(target+1);
+  prev[0]=true;
+    if(arr[0] <=target)
+      prev[arr[0]]=true;
     for(int i=1;i<N;i++)
     {
         for(int j=1;j<=target;j++)
         {
-             bool nottake=dp[i-  1][j];
+             bool nottake=prev[j];
             bool take=false;
             if(arr[i]<=j)
-                take=dp[i-1][j-arr[i]];
-           
-            dp[i][j]=take|nottake;
+                take=prev[j-arr[i]];
+  curr[j]=take||nottake;
 }
+prev=curr;
 }
-    return dp[N-1][target];
+    return prev[target];
 }
     bool canPartition(vector<int>& nums) {
          int sum=0;
