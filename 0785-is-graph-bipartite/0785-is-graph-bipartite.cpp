@@ -1,23 +1,18 @@
 class Solution {
 public:
-    bool bfs(vector<int>&col ,vector<vector<int>>graph,int n,int i)
+    bool dfs(vector<int>&col ,vector<vector<int>>graph,int n,int i)
     {
-    queue<int>q;
-        q.push(i);
-        col[i]=0;
-        while(!q.empty())
+  
+    for(auto it:graph[i])
+    {
+        if(col[it]==-1)
         {
-            int t=q.front();
-            q.pop();
-            for(auto it:graph[t])
-            {
-                if(col[it]==-1){
-                  col[it]=!col[t];
-                q.push(it);
-                }
-                else if(col[it]==col[t])
-                    return false;
+            col[it]=!col[i];
+            if(dfs(col,graph,n,it)==false)
+                return false;
 }
+        else if(col[it]==col[i])
+            return false;
 }
         return true;
 }
@@ -28,7 +23,8 @@ public:
         {
           if(col[i]==-1)
           {
-             if(bfs(col,graph,n,i)==false)
+               col[i]=0;
+             if(dfs(col,graph,n,i)==false)
                  return false;
           }
 }
