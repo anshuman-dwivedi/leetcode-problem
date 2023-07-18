@@ -7,6 +7,7 @@ public:
         if(dp[n]!=-1)
             return dp[n];
         int res=INT_MAX;
+
             for(int i=1;i*i<=n;i++)
             {
                 int sq=i*i;
@@ -16,7 +17,14 @@ public:
         return dp[n]=res;
 }
     int numSquares(int n) {
-      vector<int>dp(n+1,-1);
-       return  helper(n,dp);
+      vector<int>dp(n+1,INT_MAX);
+        dp[0]=0;
+        for(int i=1;i*i<=n;i++)
+        {
+            int p=i*i;
+        for(int sq=p;sq<n+1;sq++)
+            dp[sq]=min(dp[sq-p]+1,dp[sq]);
+}
+       return  dp[n];
     }
 };
