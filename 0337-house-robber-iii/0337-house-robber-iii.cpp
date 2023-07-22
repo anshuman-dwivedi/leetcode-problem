@@ -11,25 +11,22 @@
  */
 class Solution {
 public:
-    unordered_map<TreeNode*,int>mp;
-    int helper(TreeNode* root)
+    pair<int,int> helper(TreeNode* root)
     {
-        if(root==NULL)
-            return 0;
-        if(mp.find(root)!=mp.end())
-            return mp[root];
-        int i_c=root->val;
-        if(root->left!=NULL)
-            i_c+=helper(root->left->left)+helper(root->left->right);
-          if(root->right!=NULL)
-            i_c+=helper(root->right->left)+helper(root->right->right);
-        int e_c=helper(root->left)+helper(root->right);
-        int ans=max(i_c,e_c);
-        mp[root]=ans;
+    if(root==NULL)
+        return {0,0};
+  pair<int,int>l=helper(root->left);
+   pair<int,int>r=helper(root->right);     
+        int i_c=root->val+l.second+r.second;
+        int e_c=max(l.first,l.second)+max(r.first,r.second);
+        pair<int,int> ans={i_c,e_c};
      return ans;   
         
 }
     int rob(TreeNode* root) {
-       return helper(root); 
+        
+        pair<int,int>result=helper(root); 
+        return max(result.first,result.second);
+     
     }
 };
