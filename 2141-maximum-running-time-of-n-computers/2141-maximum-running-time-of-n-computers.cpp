@@ -16,7 +16,9 @@ public:
 }
     long long maxRunTime(int n, vector<int>& batteries) {
        long long  low=0,ans=0;
-        long long high=1e14;
+        long long high=0;
+        for(int i=0;i<batteries.size();i++)
+            high+=batteries[i];
         while(low<=high)
         {
             long long mid=low+(high-low)/2;
