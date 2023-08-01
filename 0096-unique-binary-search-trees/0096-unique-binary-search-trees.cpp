@@ -14,7 +14,7 @@ public:
         return dp[n];
 }
     int numTrees(int n) {
-       vector<int>dp(20,0);
+       vector<int>dp(n+1,0);
         return helper(n,dp);
     }
 };
